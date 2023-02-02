@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,16 @@ public class EnvironElement : MonoBehaviour
         set { speedChange = value; }
 
     }
+
+    [SerializeField] enum ElementType
+    {
+        Mud,
+        BrokenPot,
+        DisappearingGround
+
+    }
+    [SerializeField] ElementType type;
+
 
     // Start is called before the first frame update
     void Start()

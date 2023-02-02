@@ -10,13 +10,15 @@ public class Player : MonoBehaviour
 
     // Basic movement and player flipping
     float movementDir;
-    float playerSpeed = 3f;
-    float jumpHeight = 5f;
+    [SerializeField] float playerBaseSpeed;// = 3f;
+    [SerializeField] float playerSpeed;
+    [SerializeField] float jumpHeight;// = 5f;
     float flipSprite;
 
     // Ability Variables
+    bool inMud = false;
     bool grounded = true;
-    float dashCooldown = 3f;
+    [SerializeField] float dashCooldown;// = 3f;
 
     // SerializedFields to input the ground layer as well as the player's feet position
     [SerializeField] Transform groundPoint;
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
         flipSprite = transform.localScale.x;
         rb = GetComponent<Rigidbody2D>();
         animate = GetComponent<Animator>();
+        playerSpeed = playerBaseSpeed;
     }
 
     // Update is called once per frame
@@ -52,7 +55,7 @@ public class Player : MonoBehaviour
         Flip();
 
         // If the player pressed space while grounded, then jump
-        if (Input.GetKeyDown(KeyCode.Space) && grounded) {
+        if (Input.GetKeyDown(KeyCode.Space) && grounded && !inMud) {
             Jump();
         }
 
@@ -108,6 +111,7 @@ public class Player : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if(collision.gameObject.tag == "Ground")
         {
             grounded = true;
@@ -117,6 +121,9 @@ public class Player : MonoBehaviour
         {
             playerSpeed *= collision.gameObject.GetComponent<EnvironElement>().SpeedChange; //the player speed variable will need a default value in the future. right now the player will just be permanently slower every time they walk on mud
             //also, undo this in the OnCollisionExit2D
+            inMud = true;
+
+        
         }
     }
 
@@ -129,6 +136,12 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             grounded = false;
+        }
+
+        if (collision.gameObject.tag == "Environment") //reset player's speed when exiting mud
+        {
+            playerSpeed = playerBaseSpeed;
+            inMud = false;
         }
     }
 }
