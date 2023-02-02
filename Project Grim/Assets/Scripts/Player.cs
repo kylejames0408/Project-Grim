@@ -112,6 +112,12 @@ public class Player : MonoBehaviour
         {
             grounded = true;
         }
+
+        if(collision.gameObject.tag == "Environment")
+        {
+            playerSpeed *= collision.gameObject.GetComponent<EnvironElement>().SpeedChange; //the player speed variable will need a default value in the future. right now the player will just be permanently slower every time they walk on mud
+            //also, undo this in the OnCollisionExit2D
+        }
     }
 
     /// <summary>
