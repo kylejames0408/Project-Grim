@@ -8,6 +8,7 @@ TagManager:
   - Ghost
   - Environment
   - Checkpoint
+  - Attack
   layers:
   - Default
   - TransparentFX

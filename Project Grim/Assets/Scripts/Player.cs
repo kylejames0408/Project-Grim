@@ -7,7 +7,11 @@ public class Player : MonoBehaviour
     // Unity GetComponents 
     Rigidbody2D rb;
     Animator animate;
+
+    // Player statistics
+    public int Health { get; set; }
     [SerializeField] Checkpoint checkpointSystem;
+    [SerializeField] bool dead = false;
 
     // Basic movement and player flipping
     float movementDir;
@@ -17,14 +21,18 @@ public class Player : MonoBehaviour
     float flipSprite;
 
     // Ability Variables
-    bool inMud = false;
     bool grounded = true;
-    [SerializeField] float dashCooldown;// = 3f;
-    [SerializeField] bool dead = false;
+    bool inMud = false;
+    bool canAttack = true;
+    bool canDash = true;
+    public bool isDashing = false;
+    float dashTime = 0.2f;
+    float dashCooldown = 3f;
 
     // SerializedFields to input the ground layer as well as the player's feet position
     [SerializeField] Transform groundPoint;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] Transform attackPoint;
 
     void Start()
     {
@@ -33,6 +41,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animate = GetComponent<Animator>();
         playerSpeed = playerBaseSpeed;
+        Health = 3;
     }
 
     // Update is called once per frame
@@ -41,8 +50,6 @@ public class Player : MonoBehaviour
         // Get the movement axis and set it to the velocity. 
         // AddForce for this case makes the player slide, not what is intended.
         movementDir = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(movementDir * playerSpeed, rb.velocity.y);
-        //rb.AddForce(new Vector2(movementDir * playerSpeed, 0f), ForceMode2D.Impulse);
 
         // If the velocity isn't 0 (not moving), set the animator to move sprites
         if(rb.velocity != Vector2.zero)
@@ -62,18 +69,32 @@ public class Player : MonoBehaviour
         }
 
         // If the player pressed shift and the cooldown is at 0, then dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCooldown == 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            Dash();
-            Debug.Log("Dash time!");
+            StartCoroutine(Dash());
+            //Debug.Log("Dash time!");
             //animate.SetBool("Dash", true);
         }
 
         // If the player presses R, then slash
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.R) && canAttack)
         {
-            animate.SetTrigger("Slash");
+            StartCoroutine(Attack());
         }
+    }
+
+    /// <summary>
+    /// SOURCE: https://gist.github.com/bendux/aa8f588b5123d75f07ca8e69388f40d9
+    /// </summary>
+    private void FixedUpdate()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+
+        rb.velocity = new Vector2(movementDir * playerSpeed, rb.velocity.y);
+        //rb.AddForce(new Vector2(movementDir * playerSpeed, 0f), ForceMode2D.Impulse);
     }
 
     /// <summary>
@@ -101,10 +122,45 @@ public class Player : MonoBehaviour
 
     /// <summary>
     /// Have the player dash based on a cooldown
+    /// SOURCE: https://gist.github.com/bendux/aa8f588b5123d75f07ca8e69388f40d9
     /// </summary>
-    private void Dash()
+    private IEnumerator Dash()
     {
-        //add dash with a cooldown
+        // Set dash and dashing booleans
+        canDash = false;
+        isDashing = true;
+        // Track the original gravity
+        float originalGravity = rb.gravityScale;
+        // Turn off gravity's affect while dashing
+        rb.gravityScale = 0f;
+        // Set the dash velocity
+        rb.velocity = new Vector2(transform.localScale.x * 5f, 0f);
+
+        // Wait until done dashing
+        yield return new WaitForSeconds(dashTime);
+        // Return original gravity
+        rb.gravityScale = originalGravity;
+        // Return to normal dash state
+        isDashing = false;
+
+        // Wait until the cooldown finishes
+        yield return new WaitForSeconds(dashCooldown);
+        // Allow the player to dash again
+        canDash = true;
+    }
+
+    private IEnumerator Attack()
+    {
+        canAttack = false;
+        attackPoint.gameObject.SetActive(true);
+        animate.SetTrigger("Slash");
+
+        yield return new WaitForSeconds(0.25f);
+
+        attackPoint.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.25f);
+        canAttack = true;
     }
 
     /// <summary>
@@ -114,6 +170,7 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.gameObject.tag);
+        
         if(collision.gameObject.tag == "Ground")
         {
             grounded = true;
@@ -140,9 +197,6 @@ public class Player : MonoBehaviour
 
             }
         }
-
-
-
     }
 
     /// <summary>

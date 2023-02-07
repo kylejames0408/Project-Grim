@@ -41,6 +41,14 @@ public class EnemyBehaviour : MonoBehaviour
         return transform.localScale.x > Mathf.Epsilon;
     }
 
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Attack")
+        {
+            Destroy(gameObject);
+        }
+    }
+
     //makes the enemy turn upon exiting another box collider
     protected void OnTriggerExit2D(Collider2D collision)
     {
