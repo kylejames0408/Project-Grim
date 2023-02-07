@@ -9,6 +9,7 @@ public class EnvironElement : MonoBehaviour
     //with these variables, we can just set the values per-prefab. Then when player collides we just apply whatever value it is
 
     [SerializeField] float damageToPlayer;
+    [SerializeField] float standTimer;
 
     public float DamageToPlayer
     {
@@ -25,14 +26,23 @@ public class EnvironElement : MonoBehaviour
 
     }
 
-    [SerializeField] enum ElementType
+    [SerializeField] public enum ElementType
     {
         Mud,
         BrokenPot,
         DisappearingGround
 
     }
-    [SerializeField] ElementType type;
+
+
+    [SerializeField] private ElementType type;
+
+    public ElementType Type
+    {
+        get { return type; }
+        set { type = value; }
+    }
+
 
 
     // Start is called before the first frame update
@@ -45,5 +55,20 @@ public class EnvironElement : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        //just count down for as long as player is on top of it
+        if(type == ElementType.DisappearingGround && collision.gameObject.tag == "Player")
+        {
+            standTimer -= Time.deltaTime;
+
+            if (standTimer <= 0)
+            {
+                Debug.Log("hello");
+                Destroy(this.gameObject);
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     // Unity GetComponents 
     Rigidbody2D rb;
     Animator animate;
+    [SerializeField] Checkpoint checkpointSystem;
 
     // Basic movement and player flipping
     float movementDir;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     bool inMud = false;
     bool grounded = true;
     [SerializeField] float dashCooldown;// = 3f;
+    [SerializeField] bool dead = false;
 
     // SerializedFields to input the ground layer as well as the player's feet position
     [SerializeField] Transform groundPoint;
@@ -119,12 +121,28 @@ public class Player : MonoBehaviour
 
         if(collision.gameObject.tag == "Environment")
         {
-            playerSpeed *= collision.gameObject.GetComponent<EnvironElement>().SpeedChange; //the player speed variable will need a default value in the future. right now the player will just be permanently slower every time they walk on mud
-            //also, undo this in the OnCollisionExit2D
-            inMud = true;
+            EnvironElement environment = collision.gameObject.GetComponent<EnvironElement>();
 
-        
+            switch(environment.Type)
+            {
+                case EnvironElement.ElementType.Mud:
+                    playerSpeed *= environment.SpeedChange; //the player speed variable will need a default value in the future. right now the player will just be permanently slower every time they walk on mud
+                                                            //also, undo this in the OnCollisionExit2D
+                    inMud = true;
+                    break;
+
+                //case EnvironElement.ElementType.BrokenPot:
+                //    //wait are we not doing health?
+
+                //    break;
+
+
+
+            }
         }
+
+
+
     }
 
     /// <summary>
@@ -142,6 +160,25 @@ public class Player : MonoBehaviour
         {
             playerSpeed = playerBaseSpeed;
             inMud = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Checkpoint")
+        {
+            checkpointSystem.passedCheckpoint(collision);
+        }
+
+
+        if (collision.gameObject.tag == "Ghost")
+        {
+            if (animate.GetBool("Dash") != true)
+            {
+                dead = true;
+                rb.transform.position = checkpointSystem.RespawnPoint().position;
+                dead = false;
+            }
         }
     }
 }
