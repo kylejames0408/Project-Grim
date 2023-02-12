@@ -14,6 +14,7 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] Sprite checkpointActivated;
 
     [SerializeField] GameObject checkpointScreen;
+    [SerializeField] GameObject mainUI;
     [SerializeField] GameObject cpCheckNum;
     [SerializeField] GameObject cpTitle;
     [SerializeField] GameObject cpSouls;
@@ -52,10 +53,12 @@ public class Checkpoint : MonoBehaviour
     private IEnumerator DisplayCheckpointScreen()
     {
         checkpointScreen.SetActive(true);
+        mainUI.SetActive(false);
 
         yield return new WaitForSeconds(4.0f);
 
         checkpointScreen.SetActive(false);
+        mainUI.SetActive(true);
     }
 
     public void passedCheckpoint(Collider2D collision)
