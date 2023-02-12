@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     // Player statistics
     public int Health { get; set; }
+    public int SoulsCollected { get; set; }
     [SerializeField] Checkpoint checkpointSystem;
     [SerializeField] bool dead = false;
 
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
         animate = GetComponent<Animator>();
         playerSpeed = playerBaseSpeed;
         Health = 3;
+        SoulsCollected = 0;
     }
 
     // Update is called once per frame
