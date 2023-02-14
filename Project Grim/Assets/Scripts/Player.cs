@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     bool canDash = true;
     public bool isDashing = false;
     float dashTime = 0.2f;
-    float dashCooldown = 3f;
+    public float dashCooldown = 3f;
     int jumpCount;
 
     // SerializedFields to input the ground layer as well as the player's feet position
@@ -267,10 +267,10 @@ public class Player : MonoBehaviour
         {
             if (animate.GetBool("Dash") != true)
             {
-                dead = true;
-                playerDeathSoundEffect.Play();
-                rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
-                dead = false;
+                //dead = true;
+                //playerDeathSoundEffect.Play();
+                //rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
+                //dead = false;
             }
         }
 

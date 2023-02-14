@@ -15,14 +15,10 @@ public class UpdateUI : MonoBehaviour
     public Image[] hearts;
     public Sprite fullH, emptyH;
 
-    public Slider healthBar;
+    [SerializeField] Slider healthBar;
 
     void Start()
     {
-        //health = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Health;
-        //soulsCollected = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().SoulsCollected;
-
-        healthBar = GetComponent<Slider>();
         healthBar.maxValue = 3;
         healthBar.value = 3;
     }
@@ -30,6 +26,12 @@ public class UpdateUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        health = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Health;
+        updateSoulCount(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().SoulsCollected);
+        healthBar.value = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().dashCooldown;
+
+        Debug.Log(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().dashCooldown);
+
         for (int i = 0; i < hearts.Length; i++)
         {
             if(i < health)

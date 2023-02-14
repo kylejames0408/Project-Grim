@@ -117,9 +117,12 @@ public class EnemyInteraction : EnemyBehaviour
 
         if (collision.tag == "Attack")
         {
-            if (animate != null)
+            if (animate != null) {
                 animate.SetBool("Dead", true);
+            }
+                
 
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().SoulsCollected += 1;
             Destroy(gameObject);
         }
     }
