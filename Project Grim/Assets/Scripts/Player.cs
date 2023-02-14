@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     // Player statistics
     public int Health { get; set; }
     public int SoulsCollected { get; set; }
-    [SerializeField] Checkpoint checkpointSystem;
     [SerializeField] bool dead = false;
 
     // Basic movement and player flipping
