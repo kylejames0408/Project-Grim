@@ -15171,8 +15171,8 @@ MonoBehaviour:
   attackPoint: {fileID: 644302120}
   attackSoundEffect: {fileID: 438338283}
   dashSoundEffect: {fileID: 438338282}
-  jumpSoundEffect: {fileID: 0}
-  playerDeathSoundEffect: {fileID: 0}
+  jumpSoundEffect: {fileID: 438338281}
+  playerDeathSoundEffect: {fileID: 438338280}
 --- !u!95 &438338275
 Animator:
   serializedVersion: 4
@@ -15320,7 +15320,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8a38591a098f02a48813ec1701d67824, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.18
   m_Pitch: 1.69
   Loop: 0
