@@ -8,10 +8,10 @@ public class EnvironElement : MonoBehaviour
 
     //with these variables, we can just set the values per-prefab. Then when player collides we just apply whatever value it is
 
-    [SerializeField] float damageToPlayer;
+    [SerializeField] int damageToPlayer;
     [SerializeField] float standTimer;
 
-    public float DamageToPlayer
+    public int DamageToPlayer
     {
         get { return damageToPlayer; }
         set { damageToPlayer = value; }
@@ -29,7 +29,7 @@ public class EnvironElement : MonoBehaviour
     [SerializeField] public enum ElementType
     {
         Mud,
-        BrokenPot,
+        Religious,
         DisappearingGround
 
     }
