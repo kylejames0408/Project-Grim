@@ -71,7 +71,7 @@ public class EnemyInteraction : EnemyBehaviour
                     SeePlayer(Mathf.Abs(transform.localScale.x) * -1, Mathf.Abs(transform.localScale.x), Vector3.left, Vector3.right);
                     break;
                 case EnemyAction.Flee:
-                    SeePlayer(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.x) * -1, Vector3.right, Vector3.left);
+                    SeePlayer(Mathf.Abs(transform.localScale.x) * -1, Mathf.Abs(transform.localScale.x), Vector3.right, Vector3.left);
                     break;
             }
         }
