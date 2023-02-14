@@ -278,7 +278,7 @@ public class Player : MonoBehaviour
         {
             // Reduce player health & respawn
             Health--;
-            rb.transform.position = checkpointSystem.RespawnPoint().position;
+            rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
         }
         
         if (collision.gameObject.tag == "DeathBox")
