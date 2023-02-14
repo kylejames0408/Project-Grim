@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     private BoxCollider2D coll;
     Animator animate;
+    [SerializeField] Checkpoint checkpointSystem;
 
     // Player statistics
     public int Health { get; set; }
@@ -206,6 +207,8 @@ public class Player : MonoBehaviour
         {
             EnvironElement environment = collision.gameObject.GetComponent<EnvironElement>();
 
+            Debug.Log("hit environment");
+
             switch(environment.Type)
             {
                 case EnvironElement.ElementType.Mud:
@@ -214,15 +217,18 @@ public class Player : MonoBehaviour
                     inMud = true;
                     break;
 
-                //case EnvironElement.ElementType.BrokenPot:
-                //    //wait are we not doing health?
-
-                //    break;
+                case EnvironElement.ElementType.Religious:
+                    Health -= environment.DamageToPlayer;
+                    Debug.Log(Health);
+                    break;
 
 
 
             }
         }
+
+
+
     }
 
     /// <summary>
@@ -281,6 +287,23 @@ public class Player : MonoBehaviour
             dead = true;
             rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
             dead = false;
+        }
+
+        if (collision.gameObject.tag == "Environment")
+        {
+            EnvironElement environment = collision.gameObject.GetComponent<EnvironElement>();
+
+            Debug.Log("hit environment");
+
+            if (environment.Type == EnvironElement.ElementType.Religious)
+            {
+
+                    Health -= environment.DamageToPlayer;
+                    Debug.Log(Health);
+
+
+
+            }
         }
     }
 }
