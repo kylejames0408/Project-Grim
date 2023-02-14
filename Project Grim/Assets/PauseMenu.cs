@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
 
-    [SerializeField] private AudioSource menuClickSoundEffect;
+    //[SerializeField] private AudioSource menuClickSoundEffect;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)){
 
-            menuClickSoundEffect.Play();
+            //menuClickSoundEffect.Play();
 
             if (gameIsPaused)
             {
@@ -57,6 +57,6 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("quitting game");
         Application.Quit();
 
-        menuClickSoundEffect.Play();
+        //menuClickSoundEffect.Play();
     }
 }

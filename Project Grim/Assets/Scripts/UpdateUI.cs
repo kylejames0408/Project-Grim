@@ -30,7 +30,7 @@ public class UpdateUI : MonoBehaviour
         updateSoulCount(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().SoulsCollected);
         healthBar.value = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().dashCooldown;
 
-        Debug.Log(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().dashCooldown);
+        //Debug.Log(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().dashCooldown);
 
         for (int i = 0; i < hearts.Length; i++)
         {
