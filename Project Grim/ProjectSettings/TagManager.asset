@@ -9,6 +9,7 @@ TagManager:
   - Environment
   - Checkpoint
   - Attack
+  - PrayerLight
   layers:
   - Default
   - TransparentFX

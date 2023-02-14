@@ -30,33 +30,12 @@ public class GravediggerBehavior : EnemyBehaviour
 
     private new void OnTriggerEnter2D(Collider2D collision)
     {
-        // If the Player collides with the Gravedigger
-        if (collision.gameObject.CompareTag("Player"))
+        // If the Player collides with the Gravedigger while dashing
+        if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<Player>().isDashing)
         {
-            // If the player dashes
-            if (collision.gameObject.GetComponent<Player>().isDashing)
-            {
-                // Change the movement speed and start the timer
-                moveSpeed = 5f;
-                timer = true;
-            }
-            // If the player does not dash
-            else
-            {
-                if (!timer) // if the gravedigger isn't already running away
-                {
-                    // Reduce player health
-                    collision.gameObject.GetComponent<Player>().Health -= 1;
-                    // Debug.Log($"Player Health: {collision.gameObject.GetComponent<Player>().Health}");
-
-                    // Remove Gravedigger
-                    gameObject.SetActive(false);
-
-                    // Change gameObject to headstone and play bell sound
-                    // TODO: Headstone Change
-                    // TODO: Bell Sound
-                }
-            }
+            // Change the movement speed and start the timer
+            moveSpeed = 5f;
+            timer = true;
         }
     }
     #endregion

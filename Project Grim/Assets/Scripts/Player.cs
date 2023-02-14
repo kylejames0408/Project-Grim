@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     // Player statistics
     public int Health { get; set; }
-    [SerializeField] Checkpoint checkpointSystem;
+    [SerializeField] public Checkpoint checkpointSystem;
     [SerializeField] bool dead = false;
 
     // Basic movement and player flipping
@@ -233,6 +233,13 @@ public class Player : MonoBehaviour
                 rb.transform.position = checkpointSystem.RespawnPoint().position;
                 dead = false;
             }
+        }
+
+        if (collision.gameObject.tag == "PrayerLight" && !isDashing)
+        {
+            // Reduce player health & respawn
+            Health--;
+            rb.transform.position = checkpointSystem.RespawnPoint().position;
         }
     }
 }
