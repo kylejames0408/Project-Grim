@@ -55,7 +55,7 @@ public class EnemyInteraction : EnemyBehaviour
             playerInRange = true;
             enemyInAction = true;
 
-            if(attackCooldown <= .75)
+            if(attackCooldown <= 1)
             {
                 if (animate != null)
                     animate.SetBool("Attack", true);
