@@ -17,6 +17,8 @@ public class EnemyInteraction : EnemyBehaviour
     private float leftDirX;
     private float rightDirX;
 
+    private float attackCooldown = 0;
+
     //different enemy actions when they see the player
     public enum EnemyAction
     {
@@ -40,13 +42,30 @@ public class EnemyInteraction : EnemyBehaviour
     {
         //Debug.Log(isChasing);
 
+        attackCooldown += Time.deltaTime;
+
+        if(attackCooldown >= 5)
+        {
+            attackCooldown = 0;
+        }
+
         //the ghost will start to move if the player comes into range
         if (Vector2.Distance(transform.position, playerTransform.position) <= detectionRange)
         {
             playerInRange = true;
             enemyInAction = true;
-            if(animate != null)
-                animate.SetBool("Attack", true);
+
+            if(attackCooldown <= .75)
+            {
+                if (animate != null)
+                    animate.SetBool("Attack", true);
+            }
+            else
+            {
+                if (animate != null)
+                    animate.SetBool("Attack", false);
+            }
+       
         }
 
         else
@@ -117,13 +136,19 @@ public class EnemyInteraction : EnemyBehaviour
 
         if (collision.tag == "Attack")
         {
-            if (animate != null) {
-                animate.SetBool("Dead", true);
-            }
-                
+            health -= 1;
 
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().SoulsCollected += 1;
-            Destroy(gameObject);
+            if(health == 0)
+            {
+                if (animate != null)
+                {
+                    animate.SetBool("Dead", true);
+                }
+
+
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().SoulsCollected += 1;
+                Destroy(gameObject);
+            }
         }
     }
 }

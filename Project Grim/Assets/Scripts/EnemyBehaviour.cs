@@ -11,6 +11,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField] protected AudioSource deathSoundEffect;
 
+    [SerializeField] protected int health = 1;
+
     // Start is called before the first frame update
     protected void Start()
     {
