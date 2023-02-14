@@ -49,3 +49,7 @@ MonoBehaviour:
   - {fileID: 0}
   checkpointOff: {fileID: 21300000, guid: a2c0e34707b0742469d4a29fd3458262, type: 3}
   checkpointActivated: {fileID: 21300000, guid: 8646ee007ce0fde418368b034f4ebba5, type: 3}
+  checkpointScreen: {fileID: 776700193365970952, guid: 4f734adb87747934482285cf80e8a95b, type: 3}
+  cpCheckNum: {fileID: 0}
+  cpTitle: {fileID: 0}
+  cpSouls: {fileID: 0}
