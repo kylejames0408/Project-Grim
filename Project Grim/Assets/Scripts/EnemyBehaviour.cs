@@ -8,6 +8,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     protected Rigidbody2D enemyBody;
 
+    [SerializeField] protected AudioSource deathSoundEffect;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -45,7 +47,9 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if(collision.tag == "Attack")
         {
+            deathSoundEffect.Play();
             Destroy(gameObject);
+          
         }
     }
 

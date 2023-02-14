@@ -37,6 +37,12 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform attackPoint;
 
+    // Sound Effects
+    [SerializeField] private AudioSource attackSoundEffect;
+    [SerializeField] private AudioSource dashSoundEffect;
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource playerDeathSoundEffect;
+
     void Start()
     {
         // Set the sprite's direction as well as get the rigidbody and animator
@@ -78,6 +84,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && jumpCount > 0 && !inMud) {
             Jump();
             jumpCount -= 1;
+            jumpSoundEffect.Play();
         }
 
         // If the player pressed shift and the cooldown is at 0, then dash
@@ -85,12 +92,16 @@ public class Player : MonoBehaviour
         { 
             StartCoroutine(Dash());
             //Debug.Log("Dash time!");
+
+            dashSoundEffect.Play();
         }
        
         // If the player presses R, then slash
         if ((Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space)) && canAttack)
         {
             StartCoroutine(Attack());
+
+            attackSoundEffect.Play();
         }
     }
 
@@ -252,6 +263,7 @@ public class Player : MonoBehaviour
             if (animate.GetBool("Dash") != true)
             {
                 dead = true;
+                playerDeathSoundEffect.Play();
                 rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
                 dead = false;
             }
