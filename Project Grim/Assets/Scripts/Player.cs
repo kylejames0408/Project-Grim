@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     // Unity GetComponents 
     Rigidbody2D rb;
+    private BoxCollider2D coll;
     Animator animate;
 
     // Player statistics
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     float dashTime = 0.2f;
     float dashCooldown = 3f;
+    int jumpCount;
 
     // SerializedFields to input the ground layer as well as the player's feet position
     [SerializeField] Transform groundPoint;
@@ -40,10 +42,12 @@ public class Player : MonoBehaviour
         // Set the sprite's direction as well as get the rigidbody and animator
         flipSprite = transform.localScale.x;
         rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<BoxCollider2D>();
         animate = GetComponent<Animator>();
         playerSpeed = playerBaseSpeed;
         Health = 3;
         SoulsCollected = 0;
+        jumpCount = 2;
     }
 
     // Update is called once per frame
@@ -65,21 +69,26 @@ public class Player : MonoBehaviour
         // After moving, flip the character depending on direction
         Flip();
 
+        if (IsGrounded())
+        {
+            jumpCount = 2;
+        }
+
         // If the player pressed space while grounded, then jump
-        if (Input.GetKeyDown(KeyCode.Space) && grounded && !inMud) {
+        if (Input.GetKeyDown(KeyCode.W) && jumpCount > 0 && !inMud) {
             Jump();
+            jumpCount -= 1;
         }
 
         // If the player pressed shift and the cooldown is at 0, then dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        {
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonUp(1)) && canDash)
+        { 
             StartCoroutine(Dash());
             //Debug.Log("Dash time!");
-            //animate.SetBool("Dash", true);
         }
-
+       
         // If the player presses R, then slash
-        if (Input.GetKeyUp(KeyCode.R) && canAttack)
+        if ((Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space)) && canAttack)
         {
             StartCoroutine(Attack());
         }
@@ -131,6 +140,7 @@ public class Player : MonoBehaviour
         // Set dash and dashing booleans
         canDash = false;
         isDashing = true;
+        animate.SetBool("Dash", true);
         // Track the original gravity
         float originalGravity = rb.gravityScale;
         // Turn off gravity's affect while dashing
@@ -143,6 +153,7 @@ public class Player : MonoBehaviour
         // Return original gravity
         rb.gravityScale = originalGravity;
         // Return to normal dash state
+         animate.SetBool("Dash", false);
         isDashing = false;
 
         // Wait until the cooldown finishes
@@ -173,10 +184,12 @@ public class Player : MonoBehaviour
     {
         Debug.Log(collision.gameObject.tag);
         
+        /*
         if(collision.gameObject.tag == "Ground")
         {
             grounded = true;
         }
+        */
 
         if(collision.gameObject.tag == "Environment")
         {
@@ -219,6 +232,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    //new grounding
+    private bool IsGrounded()
+    {
+        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, groundLayer);
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Checkpoint")
@@ -232,7 +252,7 @@ public class Player : MonoBehaviour
             if (animate.GetBool("Dash") != true)
             {
                 dead = true;
-                rb.transform.position = checkpointSystem.RespawnPoint().position;
+                rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
                 dead = false;
             }
         }
@@ -242,6 +262,13 @@ public class Player : MonoBehaviour
             // Reduce player health & respawn
             Health--;
             rb.transform.position = checkpointSystem.RespawnPoint().position;
+        }
+        
+        if (collision.gameObject.tag == "DeathBox")
+        {
+            dead = true;
+            rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
+            dead = false;
         }
     }
 }
