@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform attackPoint;
 
     // Sound Effects
+    //Sources: https://mixkit.co/, https://www.fesliyanstudios.com/
     [SerializeField] private AudioSource attackSoundEffect;
     [SerializeField] private AudioSource dashSoundEffect;
     [SerializeField] private AudioSource jumpSoundEffect;

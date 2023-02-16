@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    //Small Ghost Sprite Source: https://www.freeiconspng.com/img/36328
+    //Tank Ghost Sprite Source: https://www.spriters-resource.com/mobile/demonhuntlgnd3/sheet/44052/ 
     [SerializeField] protected float moveSpeed = 1f;
     [SerializeField] protected float baseMoveSpeed = 1f;
 
