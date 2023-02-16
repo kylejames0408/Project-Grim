@@ -192,6 +192,7 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
             currentDashTime += 0.01f;
             UIManager.SetDash(currentDashTime);
+            Debug.Log(currentDashTime);
         }
 
         // Allow the player to dash again

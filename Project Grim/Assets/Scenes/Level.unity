@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.07325295, g: 0.15438545, b: 0.1967943, a: 1}
+  m_IndirectSpecularColor: {r: 0.07325295, g: 0.15438548, b: 0.19679433, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4299,6 +4299,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8835732614094124551, guid: c223d1574bec3184c97d31eaf1406178, type: 3}
   m_PrefabInstance: {fileID: 478419414}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &173966749 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1250377428034973290, guid: f6222b05ba2486c42b912068bc3ece61, type: 3}
+  m_PrefabInstance: {fileID: 1162973717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &188676666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5343106954107881201, guid: b78702531cc991540bea14f3518027c2, type: 3}
@@ -19956,6 +19967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointSystem: {fileID: 477508454}
+  UIManager: {fileID: 1437624638}
   dead: 0
   playerBaseSpeed: 4.5
   playerSpeed: 4.5
@@ -23933,6 +23945,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1250377426848603179, guid: f6222b05ba2486c42b912068bc3ece61, type: 3}
+      propertyPath: dashBar
+      value: 
+      objectReference: {fileID: 173966749}
+    - target: {fileID: 1250377426848603179, guid: f6222b05ba2486c42b912068bc3ece61, type: 3}
+      propertyPath: playerScript
+      value: 
+      objectReference: {fileID: 438338274}
     - target: {fileID: 1250377427328006855, guid: f6222b05ba2486c42b912068bc3ece61, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -23944,6 +23964,10 @@ PrefabInstance:
     - target: {fileID: 1250377428034973290, guid: f6222b05ba2486c42b912068bc3ece61, type: 3}
       propertyPath: m_Value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250377428034973290, guid: f6222b05ba2486c42b912068bc3ece61, type: 3}
+      propertyPath: m_MaxValue
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6222b05ba2486c42b912068bc3ece61, type: 3}
@@ -25099,6 +25123,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1250377426848603168, guid: f6222b05ba2486c42b912068bc3ece61, type: 3}
   m_PrefabInstance: {fileID: 1162973717}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1437624638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1250377426848603179, guid: f6222b05ba2486c42b912068bc3ece61, type: 3}
+  m_PrefabInstance: {fileID: 1162973717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437624637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c6b178ecaa8a845b7eb086c3775e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1442000475
 GameObject:
   m_ObjectHideFlags: 0

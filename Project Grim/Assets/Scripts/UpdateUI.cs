@@ -22,7 +22,6 @@ public class UpdateUI : MonoBehaviour
     void Start()
     {
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        dashBar.maxValue = 3;
         dashBar.value = 3;
     }
 
