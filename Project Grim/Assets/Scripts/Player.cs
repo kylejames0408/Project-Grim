@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     float dashTime = 0.2f;
     public float dashCooldown = 1.5f;
-    int jumpCount;
+    bool canDoubleJump;
 
     // SerializedFields to input the ground layer as well as the player's feet position
     [SerializeField] Transform groundPoint;
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         playerSpeed = playerBaseSpeed;
         Health = 3;
         SoulsCollected = 0;
-        jumpCount = 2;
+        canDoubleJump = true;
     }
 
     // Update is called once per frame
@@ -78,13 +78,28 @@ public class Player : MonoBehaviour
 
         if (IsGrounded())
         {
-            jumpCount = 2;
+            canDoubleJump = true;
         }
 
         // If the player pressed space while grounded, then jump
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && jumpCount > 0 && !inMud) {
-            Jump();
-            jumpCount -= 1;
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && !inMud) {
+            if (IsGrounded())
+            {
+                Jump();
+                canDoubleJump = true;
+            }
+            else if (canDoubleJump)
+            {
+                //lower jump force
+                jumpHeight = jumpHeight / 1.5f;
+
+                Jump();
+                canDoubleJump = false;
+
+                //reset jump force
+                jumpHeight = jumpHeight * 1.5f;
+            }
+            
             jumpSoundEffect.Play();
         }
 
@@ -125,7 +140,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-        rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
+        //rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
+        rb.velocity = Vector2.up * jumpHeight;
     }
 
     /// <summary>
