@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     public float dashCooldown = 1.5f;
     bool canDoubleJump;
     float currentDashTime = 0.0f;
-    int jumpCount;
+  
 
     // SerializedFields to input the ground layer as well as the player's feet position
     [SerializeField] Transform groundPoint;
