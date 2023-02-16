@@ -150,7 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   baseMoveSpeed: 1
-  deathSoundEffect: {fileID: 0}
   health: 1
 --- !u!114 &5936446687792017587
 MonoBehaviour:
@@ -164,9 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb6d3f0dc7f5cd499ee43e5e64b2f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  baseMoveSpeed: 1
-  deathSoundEffect: {fileID: 0}
+  moveSpeed: 2
+  baseMoveSpeed: 2
   health: 1
   playerTransform: {fileID: 0}
   playerInRange: 0
