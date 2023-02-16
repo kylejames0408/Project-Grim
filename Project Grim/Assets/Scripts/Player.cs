@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private BoxCollider2D coll;
     Animator animate;
     [SerializeField] Checkpoint checkpointSystem;
+    [SerializeField] UpdateUI UIManager;
 
     // Player statistics
     public int Health { get; set; }
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     float dashTime = 0.2f;
     public float dashCooldown = 1.5f;
+    float currentDashTime = 0.0f;
     int jumpCount;
 
     // SerializedFields to input the ground layer as well as the player's feet position
@@ -165,12 +167,18 @@ public class Player : MonoBehaviour
         // Return original gravity
         rb.gravityScale = originalGravity;
         // Return to normal dash state
-         animate.SetBool("Dash", false);
+        animate.SetBool("Dash", false);
         isDashing = false;
 
         // Wait until the cooldown finishes
-        yield return new WaitForSeconds(dashCooldown);
+        while (currentDashTime < dashCooldown) {
+            yield return new WaitForSeconds(0.01f);
+            currentDashTime += 0.01f;
+            UIManager.SetDash(currentDashTime);
+        }
+
         // Allow the player to dash again
+        currentDashTime = 0;
         canDash = true;
     }
 
@@ -302,9 +310,6 @@ public class Player : MonoBehaviour
 
                     Health -= environment.DamageToPlayer;
                     Debug.Log(Health);
-
-
-
             }
         }
     }
