@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     bool canDash = true;
     public bool isDashing = false;
     float dashTime = 0.2f;
-    public float dashCooldown = 3f;
+    public float dashCooldown = 1.5f;
     int jumpCount;
 
     // SerializedFields to input the ground layer as well as the player's feet position
@@ -81,14 +81,14 @@ public class Player : MonoBehaviour
         }
 
         // If the player pressed space while grounded, then jump
-        if (Input.GetKeyDown(KeyCode.W) && jumpCount > 0 && !inMud) {
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && jumpCount > 0 && !inMud) {
             Jump();
             jumpCount -= 1;
             jumpSoundEffect.Play();
         }
 
         // If the player pressed shift and the cooldown is at 0, then dash
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonUp(1)) && canDash)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) || Input.GetMouseButtonUp(1)) && canDash)
         { 
             StartCoroutine(Dash());
             //Debug.Log("Dash time!");
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
         }
        
         // If the player presses R, then slash
-        if ((Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space)) && canAttack)
+        if ((Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.R)) && canAttack)
         {
             StartCoroutine(Attack());
 
