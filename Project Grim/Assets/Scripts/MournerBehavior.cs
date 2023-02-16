@@ -14,6 +14,7 @@ public class MournerBehavior : EnemyBehaviour
     [SerializeField] GameObject prayerBeam;
     bool praying = false;
     float timeRemaining = 3f; // The time for praying & running before praying
+    float totalTime;
     #endregion
 
     #region UnityMethods
@@ -30,6 +31,12 @@ public class MournerBehavior : EnemyBehaviour
 
         // Pray when necessary
         Pray();
+
+        // Beam Updates
+        if (praying)
+        {
+            prayerBeam.transform.localScale = new Vector3((totalTime-timeRemaining)/totalTime * 5, 20, 1);
+        }
     }
 
     private new void OnTriggerEnter2D(Collider2D collision)
@@ -76,6 +83,7 @@ public class MournerBehavior : EnemyBehaviour
             }
 
             timeRemaining = Random.Range(3f, 10f);
+            totalTime = timeRemaining;
         }
     }
     #endregion

@@ -527,11 +527,16 @@ MonoBehaviour:
   playerSpeed: 0
   jumpHeight: 5
   isDashing: 0
+  dashCooldown: 3
   groundPoint: {fileID: 1711360124}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   attackPoint: {fileID: 1937955541}
+  attackSoundEffect: {fileID: 0}
+  dashSoundEffect: {fileID: 0}
+  jumpSoundEffect: {fileID: 0}
+  playerDeathSoundEffect: {fileID: 0}
 --- !u!95 &1060419779
 Animator:
   serializedVersion: 4
@@ -675,6 +680,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 234340538, guid: a8a0e3858b0100a418e337bf2b488e10, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 234340540, guid: a8a0e3858b0100a418e337bf2b488e10, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 234340540, guid: a8a0e3858b0100a418e337bf2b488e10, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300751817, guid: a8a0e3858b0100a418e337bf2b488e10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300751818, guid: a8a0e3858b0100a418e337bf2b488e10, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300751818, guid: a8a0e3858b0100a418e337bf2b488e10, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300751818, guid: a8a0e3858b0100a418e337bf2b488e10, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300751818, guid: a8a0e3858b0100a418e337bf2b488e10, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4077758945191257274, guid: a8a0e3858b0100a418e337bf2b488e10, type: 3}
       propertyPath: m_RootOrder
       value: 1
