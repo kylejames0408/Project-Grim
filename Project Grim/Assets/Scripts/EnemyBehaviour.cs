@@ -11,7 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     protected Rigidbody2D enemyBody;
 
-    [SerializeField] protected AudioSource deathSoundEffect;
+    //[SerializeField] protected AudioSource deathSoundEffect;
 
     [SerializeField] protected int health = 1;
 
@@ -58,7 +58,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if(collision.tag == "Attack")
         {
-            deathSoundEffect.Play();
+            //deathSoundEffect.Play();
             Destroy(gameObject);
           
         }
