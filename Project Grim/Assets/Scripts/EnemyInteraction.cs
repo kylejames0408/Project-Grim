@@ -19,6 +19,10 @@ public class EnemyInteraction : EnemyBehaviour
 
     private float attackCooldown = 0;
 
+    //enemy invulnerability
+    private bool canBeHit = true;
+    private float invulnCounter = 0;
+
     //different enemy actions when they see the player
     public enum EnemyAction
     {
@@ -43,12 +47,28 @@ public class EnemyInteraction : EnemyBehaviour
         //Debug.Log(isChasing);
 
         attackCooldown += Time.deltaTime;
+        spriteRenderer.color = Color.white;
+        capsuleCollider.enabled = false;
 
-        if(attackCooldown >= 5)
+        if (attackCooldown >= 4)
         {
             attackCooldown = 0;
         }
 
+        //after the period of invulnerability is over, the enemy can be hit again
+        if (invulnCounter >= .75f)
+        {
+            invulnCounter = .75f;
+            canBeHit = true;
+        }
+
+        //changes sprite color to red and starts counter for invulnerability after an enemy has been hit
+        if (canBeHit == false)
+        {
+            invulnCounter += Time.deltaTime;
+            spriteRenderer.color = Color.red;
+        }
+     
         //the ghost will start to move if the player comes into range
         if (Vector2.Distance(transform.position, playerTransform.position) <= detectionRange)
         {
@@ -57,15 +77,17 @@ public class EnemyInteraction : EnemyBehaviour
 
             if(attackCooldown <= 1)
             {
+        
                 if (animate != null)
                     animate.SetBool("Attack", true);
+                    capsuleCollider.enabled = true;
+                    //GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Health -= 1;
             }
             else
             {
                 if (animate != null)
                     animate.SetBool("Attack", false);
             }
-       
         }
 
         else
@@ -87,7 +109,11 @@ public class EnemyInteraction : EnemyBehaviour
             switch (enemyAction)
             {
                 case EnemyAction.Chase:
-                    SeePlayer(Mathf.Abs(transform.localScale.x) * -1, Mathf.Abs(transform.localScale.x), Vector3.left, Vector3.right);
+                    if(canBeHit)
+                    {
+                        SeePlayer(Mathf.Abs(transform.localScale.x) * -1, Mathf.Abs(transform.localScale.x), Vector3.left, Vector3.right);
+                    }
+                
                     break;
                 case EnemyAction.Flee:
                     SeePlayer(Mathf.Abs(transform.localScale.x) * -1, Mathf.Abs(transform.localScale.x), Vector3.right, Vector3.left);
@@ -136,15 +162,21 @@ public class EnemyInteraction : EnemyBehaviour
 
         if (collision.tag == "Attack")
         {
-            health -= 1;
-
-            if(health == 0)
+    
+            if(canBeHit)
+            {
+                health -= 1;
+                canBeHit = false;
+                invulnCounter = 0;
+                spriteRenderer.color = Color.red;
+            }
+         
+            if (health == 0)
             {
                 if (animate != null)
                 {
                     animate.SetBool("Dead", true);
                 }
-
 
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().SoulsCollected += 1;
                 Destroy(gameObject);

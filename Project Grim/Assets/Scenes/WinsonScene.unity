@@ -345,6 +345,10 @@ PrefabInstance:
       value: TankGhost (1)
       objectReference: {fileID: 0}
     - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
+      propertyPath: health
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1842542555}
@@ -420,6 +424,18 @@ PrefabInstance:
     - target: {fileID: 9174746381466225194, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
       propertyPath: m_Name
       value: TankGhost
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
+      propertyPath: health
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
+      propertyPath: kbForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
+      propertyPath: kbCounter
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
       propertyPath: playerTransform
@@ -547,6 +563,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   baseMoveSpeed: 4
+  deathSoundEffect: {fileID: 0}
+  health: 1
   playerTransform: {fileID: 1842542555}
   playerInRange: 0
   animate: {fileID: 0}
@@ -850,11 +868,16 @@ MonoBehaviour:
   playerSpeed: 0
   jumpHeight: 10
   isDashing: 0
+  dashCooldown: 3
   groundPoint: {fileID: 949688277}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   attackPoint: {fileID: 1480868214}
+  attackSoundEffect: {fileID: 0}
+  dashSoundEffect: {fileID: 0}
+  jumpSoundEffect: {fileID: 0}
+  playerDeathSoundEffect: {fileID: 0}
 --- !u!95 &1842542551
 Animator:
   serializedVersion: 4

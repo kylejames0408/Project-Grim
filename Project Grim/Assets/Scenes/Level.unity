@@ -15427,7 +15427,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 857f0cb66f99c0646a1bb9f9aea4c8e5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.29
   m_Pitch: 1.35
   Loop: 0
   Mute: 0
@@ -15523,7 +15523,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b2c295ce3ee2c174babcfa6c8af295bf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.72
+  m_Volume: 0.51
   m_Pitch: 1.48
   Loop: 0
   Mute: 0
@@ -15619,7 +15619,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bd2a76d8df6fcce47b9c8692e9e5e726, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_Volume: 0.22
   m_Pitch: 1.25
   Loop: 0
   Mute: 0
@@ -18982,7 +18982,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
       propertyPath: health
-      value: 10
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
+      propertyPath: moveSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
+      propertyPath: baseMoveSpeed
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
       propertyPath: playerTransform
@@ -21926,7 +21934,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 92f599f7f592e40468965ecebc8cae6f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.229
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -22623,7 +22631,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
       propertyPath: health
-      value: 10
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
+      propertyPath: moveSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
+      propertyPath: baseMoveSpeed
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9174746381466225195, guid: ebd46cbce34763047a9cdacf2ea58cfe, type: 3}
       propertyPath: playerTransform

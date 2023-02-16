@@ -13,10 +13,16 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField] protected int health = 1;
 
+    protected SpriteRenderer spriteRenderer;
+    protected CapsuleCollider2D capsuleCollider;
+
     // Start is called before the first frame update
     protected void Start()
     {
         enemyBody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.white;
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame

@@ -256,6 +256,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2.5
   baseMoveSpeed: 2.5
+  deathSoundEffect: {fileID: 0}
+  health: 4
   playerTransform: {fileID: 0}
   playerInRange: 0
   animate: {fileID: 4309804907241138135}

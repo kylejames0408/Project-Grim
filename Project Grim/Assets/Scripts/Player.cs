@@ -278,12 +278,14 @@ public class Player : MonoBehaviour
         {
             // Reduce player health & respawn
             Health--;
+            playerDeathSoundEffect.Play();
             rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
         }
         
         if (collision.gameObject.tag == "DeathBox")
         {
             dead = true;
+            playerDeathSoundEffect.Play();
             rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
             dead = false;
         }
