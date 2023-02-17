@@ -3,12 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Ghost
+  - Environment
+  - Checkpoint
+  - Attack
+  - PrayerLight
+  - DeathBox
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
@@ -40,4 +47,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: ItemsBehind
+    uniqueID: 2311116495
+    locked: 0
+  - name: Player
+    uniqueID: 4018215879
+    locked: 0
+  - name: UI
+    uniqueID: 4262743503
     locked: 0
