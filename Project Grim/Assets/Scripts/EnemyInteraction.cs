@@ -68,6 +68,20 @@ public class EnemyInteraction : EnemyBehaviour
             invulnCounter += Time.deltaTime;
             spriteRenderer.color = Color.red;
         }
+ 
+     
+        //makes the player invulnerable for a short time after getting hit
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().isHit == true)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().invulnTime += Time.deltaTime;
+        }
+
+        //players can be hit again after a certain amount of time has passed
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().invulnTime >= 10.0f)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().isHit = false;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().invulnTime = 0;
+        }
      
         //the ghost will start to move if the player comes into range
         if (Vector2.Distance(transform.position, playerTransform.position) <= detectionRange)
@@ -75,13 +89,23 @@ public class EnemyInteraction : EnemyBehaviour
             playerInRange = true;
             enemyInAction = true;
 
-            if(attackCooldown <= 1)
+            
+            if (attackCooldown <= 1 && attackCooldown >= .70f)
             {
-        
-                if (animate != null)
-                    animate.SetBool("Attack", true);
+                if (enemyAction == EnemyAction.Chase)
+                {
+                    if (animate != null)
+                        animate.SetBool("Attack", true);
                     capsuleCollider.enabled = true;
-                    //GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Health -= 1;
+
+                    //decreases player's health by one every time the ghost attacks within range
+                    if (GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().isHit == false)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().isHit = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Health -= 1;
+                    }
+                }
+
             }
             else
             {

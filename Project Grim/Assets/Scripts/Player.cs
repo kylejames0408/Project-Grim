@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     public int SoulsCollected { get; set; }
     [SerializeField] bool dead = false;
 
+    public float invulnTime { get; set; }
+    public bool isHit { get; set; }
+
     // Basic movement and player flipping
     float movementDir;
     [SerializeField] float playerBaseSpeed;// = 3f;
@@ -58,6 +61,8 @@ public class Player : MonoBehaviour
         Health = 3;
         SoulsCollected = 0;
         canDoubleJump = true;
+        invulnTime = 0;
+        isHit = false;
     }
 
     // Update is called once per frame
