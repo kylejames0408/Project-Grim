@@ -20,8 +20,16 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] GameObject cpSouls;
 
 
+    int ghostCount;
+
+
     void Start()
     {
+        GameObject[] listOfGhosts = GameObject.FindGameObjectsWithTag("Ghost");
+        foreach(GameObject ghost in listOfGhosts)
+        {
+            ghostCount++;
+        }
     }
 
     // Update is called once per frame
@@ -33,7 +41,7 @@ public class Checkpoint : MonoBehaviour
     void updateTextScreen(int state, int soulsCollected)
     {
         cpCheckNum.GetComponent<TMPro.TextMeshProUGUI>().text = "CHECKPOINT #" + state;
-        cpSouls.GetComponent<TMPro.TextMeshProUGUI>().text = "Souls Collected: " + soulsCollected + "/30";
+        cpSouls.GetComponent<TMPro.TextMeshProUGUI>().text = "Souls Collected: " + soulsCollected + "/" + ghostCount;
         switch (state)
         {
             case 2:
