@@ -293,12 +293,11 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "Ghost")
         {
-            if (animate.GetBool("Dash") != true)
+            if (Health <= 0)
             {
-                //dead = true;
-                //playerDeathSoundEffect.Play();
-                //rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
-                //dead = false;
+                playerDeathSoundEffect.Play();
+                Health = 3;
+                rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
             }
         }
 
