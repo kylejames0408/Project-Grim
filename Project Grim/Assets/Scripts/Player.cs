@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
             currentDashTime += 0.01f;
             UIManager.SetDash(currentDashTime);
-            Debug.Log(currentDashTime);
+            //Debug.Log(currentDashTime);
         }
 
         // Allow the player to dash again
@@ -220,7 +220,7 @@ public class Player : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
+        //Debug.Log(collision.gameObject.tag);
         
         /*
         if(collision.gameObject.tag == "Ground")
@@ -287,6 +287,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Checkpoint")
         {
             checkpointSystem.passedCheckpoint(collision);
+            Health = 3;
         }
 
 
@@ -313,6 +314,7 @@ public class Player : MonoBehaviour
         {
             dead = true;
             playerDeathSoundEffect.Play();
+            Health = 3;
             rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
             dead = false;
         }
@@ -332,6 +334,7 @@ public class Player : MonoBehaviour
                 if(Health <= 0)
                 {
                     playerDeathSoundEffect.Play();
+                    Health = 3;
                     rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
                 }
 
