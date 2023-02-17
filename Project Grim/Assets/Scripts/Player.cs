@@ -326,8 +326,15 @@ public class Player : MonoBehaviour
             if (environment.Type == EnvironElement.ElementType.Religious)
             {
 
-                    Health -= environment.DamageToPlayer;
-                    Debug.Log(Health);
+                Health -= environment.DamageToPlayer;
+                Debug.Log(Health);
+                
+                if(Health <= 0)
+                {
+                    playerDeathSoundEffect.Play();
+                    rb.transform.position = new Vector3(checkpointSystem.RespawnPoint().position.x, checkpointSystem.RespawnPoint().position.y + 1f, checkpointSystem.RespawnPoint().position.z);
+                }
+
             }
         }
     }
